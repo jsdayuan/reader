@@ -1,0 +1,7 @@
+
+/**
+ * HOME
+ */
+export const GET_GOOD_LIST='GET_GOOD_LIST'
+export const GET_BRAND_LIST='GET_BRAND_LIST'
+export const GET_COLUMN_LIST='GET_COLUMN_LIST'
