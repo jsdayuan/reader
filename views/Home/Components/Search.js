@@ -13,7 +13,7 @@ class Search extends React.Component {
     return (
       <View style={Styles.box}>
         <View style={Styles.text} >
-          <Button type='clear' onPress={() => { this.props.routerTo('ShopSearch') }}
+          <Button type='clear' onPress={() => { this.props.routerTo('Search') }}
             icon={
               <Icon
                 name='search'

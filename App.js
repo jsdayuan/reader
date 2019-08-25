@@ -6,15 +6,15 @@ import HeaderColors from "./static/defaultColors/headerColors"
 
 import { TabNavigator } from "./core/bottomTab"
 
-import ShopSearch from "./views/ShopSearch/ShopSearch"
+import Search from "./views/Search/Search"
 
 const AppNavigator = createStackNavigator(
   {
     TabNavigator: {
       screen: TabNavigator
     },
-    ShopSearch: {
-      screen: ShopSearch
+    Search: {
+      screen: Search
     }
   },
   {

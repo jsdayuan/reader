@@ -3,14 +3,14 @@ import { View, Text } from "react-native";
 import { connect } from "react-redux"
 import { Button } from 'react-native-elements';
 
-class ShopSearch extends React.Component {
+class Search extends React.Component {
   static navigationOptions = {
-    title: '商品搜索',
+    title: '搜索',
   };
   render() {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>商品搜索</Text>
+        <Text>Search</Text>
         <Button
           title="Outline 商品详情"
           type="outline"
@@ -26,4 +26,4 @@ const mapStateToProps = (state) => {
     Home:state.Home
   }
 }
-export default connect(mapStateToProps)(ShopSearch)
+export default connect(mapStateToProps)(Search)
