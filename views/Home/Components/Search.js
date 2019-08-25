@@ -21,7 +21,7 @@ class Search extends React.Component {
                 color='#ccc'
               />
             }
-            title="输入商品名或粘贴宝贝标题搜索"
+            title="书名、作者"
             titleStyle={{
               color: '#ccc',
               fontSize: 15

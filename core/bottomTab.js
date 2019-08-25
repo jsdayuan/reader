@@ -56,6 +56,10 @@ export const TabNavigator = createBottomTabNavigator({
     tabBarOptions: {
       activeTintColor: `${Colors.color}`,
       inactiveTintColor: 'gray',
+      style:{
+        // backgroundColor:Colors.backgroundColor,
+        borderTopColor:Colors.backgroundColor
+      }
     }
   }
 );

@@ -1,62 +1,146 @@
 
 
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { createRef } from "react";
+import { View, StyleSheet, ActivityIndicator } from "react-native";
 import { connect } from "react-redux"
 import Swiper from 'react-native-swiper'
+import { Icon, Image, Text } from "react-native-elements"
 
 class SwiperComponent extends React.Component {
-  
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      SwiperOption: {
+        showsPagination: false,
+        loop: false
+      },
+      swiper: [
+        {
+          title: '两全其美',
+          zz: "梅尔·海螺",
+          image: 'https://img3.doubanio.com/view/subject/m/public/s32324820.jpg',
+          lick: 1
+        },
+        {
+          image: 'https://img3.doubanio.com/view/subject/m/public/s33301325.jpg',
+          lick: 0
+        },
+        {
+          image: 'https://img3.doubanio.com/view/subject/m/public/s33301325.jpg',
+          lick: 1
+        }
+      ]
+    }
+
+    this.swiper = createRef()
+
+    this.nextPage = this.nextPage.bind(this)
+  }
+
+
+  componentDidMount() {
+    console.log(this.swiper, 'a');
+  }
+
+  nextPage() {
+    this.swiper.current.scrollBy(1)
+  }
+
   render() {
+    let { SwiperOption, swiper } = this.state
     return (
-      <View style={{ height: 200 }} >
-        <Swiper style={styles.wrapper} autoplay={true}
-          dot={<View style={styles.dot} />}
-          activeDot={<View style={styles.activeDot} />}
-        >
-          <View style={styles.slide1}>
-            <Text style={styles.text}>Hello Swiper</Text>
-          </View>
-          <View style={styles.slide2}>
-            <Text style={styles.text}>Beautiful</Text>
-          </View>
-          <View style={styles.slide3}>
-            <Text style={styles.text}>And simple</Text>
-          </View>
-        </Swiper>
+      <View style={styles.box} >
+        <View style={styles.swiperBox}>
+          <Swiper style={styles.wrapper} {...SwiperOption} ref={this.swiper}>
+            {
+              swiper.map((val, idx) => {
+                return (
+                  <View style={styles.slide} key={idx}>
+                    <View style={styles.swiperTop}>
+                      <Image
+                        source={{ uri: val.image }}
+                        style={{ width: 150, height: 200 }}
+                        placeholderStyle={{ backgroundColor: '#fff' }}
+                        PlaceholderContent={<ActivityIndicator />}
+                      />
+                      <View style={styles.topTxtBox}>
+                        <Text h4 style={[{ fontWeight: 'bold' }, styles.paddingTop]}>{val.title}</Text>
+                        <Text style={styles.paddingTop}>{val.zz}</Text>
+                      </View>
+                    </View>
+                    <View style={styles.swiperBottom}>
+                      {
+                        val.lick ?
+                          <Icon
+                            type='font-awesome'
+                            name='heart'
+                            color="red"
+                            onPress={() => console.log('hello')}
+                          />
+                          :
+                          <Icon
+                            type='font-awesome'
+                            name='heart-o'
+                            onPress={() => console.log('hello')}
+                          />
+                      }
+                    </View>
+                  </View>
+                )
+              })
+            }
+          </Swiper>
+        </View>
+        <Icon
+          name='chevron-right'
+          containerStyle={styles.nextIcon}
+          raised
+          onPress={this.nextPage}
+        />
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  wrapper: {},
-  slide1: {
+  box: {
+    flex: .75,
+    position: 'relative'
+  },
+  swiperBox: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#9DD6EB'
+    overflow: 'hidden'
   },
-  slide2: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#97CAE5'
-  },
-  slide3: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#92BBD9'
-  },
-  text: {
-    color: '#fff',
-    fontSize: 30,
-    fontWeight: 'bold'
-  },
-  dot: { backgroundColor: 'rgba(255,255,255,.3)', width: 13, height: 13, borderRadius: 7, marginLeft: 7, marginRight: 7 },
-  activeDot: { backgroundColor: '#fff', width: 13, height: 13, borderRadius: 7, marginLeft: 7, marginRight: 7 }
+  wrapper: {
 
+  },
+  slide: {
+    flex: 1,
+    alignItems: 'center',
+    borderRadius: 6,
+    backgroundColor: '#fff',
+    margin: 18,
+    position: 'relative'
+  },
+  nextIcon: {
+    position: 'absolute',
+    right: 0,
+    bottom: 0
+  },
+  swiperTop: {
+    paddingTop: 50
+  },
+  topTxtBox: {
+    alignItems: 'center'
+  },
+  paddingTop: {
+    paddingTop: 12
+  },
+  swiperBottom: {
+    position: 'absolute',
+    bottom: 30
+  }
 })
 
 const mapStateToProps = (state) => {

@@ -1,4 +1,3 @@
-
 function curry(fn, len = fn.length) {
   return (function curried(iterArgs) {
     return function (...args) {
@@ -44,10 +43,15 @@ function reverseArgs(fn) {
   }, fn.length)
 }
 
-function partial(fn,...prevArgs){
-  return function (...lastArgs){
-    return fn(...prevArgs,...lastArgs)
+function partial(fn, ...prevArgs) {
+  return function (...lastArgs) {
+    return fn(...prevArgs, ...lastArgs)
   }
+}
+
+function test(title, val) {
+  console.log(`${title}:${val}`)
+  return val
 }
 
 let events = {
@@ -58,9 +62,10 @@ let events = {
   reduce: unboundMethod('reduce', 3),
   map: unboundMethod('map', 2),
   forEach: unboundMethod('forEach', 2),
-  prop,
+  prop: curry(prop),
   reverseArgs,
-  partial
+  partial,
+  test:curry(test)
 }
 export default helpers(events)
 

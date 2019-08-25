@@ -1,6 +1,9 @@
 import React from "react";
-import { View, StyleSheet, Text, ScrollView } from "react-native";
+import { View, StyleSheet, Text, ScrollView,SafeAreaView } from "react-native";
 import { connect } from "react-redux"
+
+import {EqSize} from "../../core/EquipmentInfo"
+import Colors from "../../static/defaultColors/headerColors"
 
 import Search from "./Components/Search"
 import Swiper from "./Components/Swiper"
@@ -27,19 +30,19 @@ class HomeScreen extends React.Component {
   render() {
     let routerTo = RouterTo(this)
     return (
-      <View style={Styles.box}>
-        <ScrollView>
+      <SafeAreaView style={Styles.box}>
           <Search routerTo={routerTo} />
           <Swiper />
-        </ScrollView>
-      </View>
+      </SafeAreaView>
     );
   }
 }
 
 const Styles = StyleSheet.create({
-  box: {
-    marginTop: -7
+  box:{
+    backgroundColor:Colors.backgroundColor,
+    width:EqSize.width,
+    height:EqSize.height
   },
   center: {
     flex: 1,
